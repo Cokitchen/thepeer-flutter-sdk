@@ -53,11 +53,11 @@ class ThepeerSuccessData with EquatableMixin {
   final String type;
   final bool directDebit;
   final String status;
-  final User user;
+  final User? user;
   final String mode;
   final String reference;
   final dynamic meta;
-  final Peer peer;
+  final Peer? peer;
   final String createdAt;
   final String updatedAt;
 
@@ -117,11 +117,11 @@ class ThepeerSuccessData with EquatableMixin {
       'type': type,
       'direct_debit': directDebit,
       'status': status,
-      'user': user.toMap(),
+      'user': user?.toMap(),
       'meta': meta,
       'mode': mode,
       'reference': reference,
-      'peer': peer.toMap(),
+      'peer': peer?.toMap(),
       'created_at': createdAt,
       'updated_at': updatedAt,
     };
@@ -135,10 +135,10 @@ class ThepeerSuccessData with EquatableMixin {
       type: map['type'],
       directDebit: map['direct_debit'],
       status: map['status'],
-      user: User.fromMap(map['user']),
+      user: map['user'] == null ? null : User.fromMap(map['user']),
       mode: map['mode'],
       reference: map['reference'],
-      peer: Peer.fromMap(map['peer']),
+      peer: map['peer'] == null ? null : Peer.fromMap(map['peer']),
       meta: map['meta'],
       createdAt: map['created_at'],
       updatedAt: map['updated_at'],
@@ -156,7 +156,7 @@ class ThepeerSuccessData with EquatableMixin {
   bool get stringify => true;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       id,
       remark,
@@ -258,8 +258,8 @@ class User with EquatableMixin {
 }
 
 class Peer with EquatableMixin {
-  final Business business;
-  final User user;
+  final Business? business;
+  final User? user;
   Peer({
     required this.business,
     required this.user,
@@ -277,8 +277,8 @@ class Peer with EquatableMixin {
 
   Map<String, dynamic> toMap() {
     return {
-      'business': business.toMap(),
-      'user': user.toMap(),
+      'business': business?.toMap(),
+      'user': user?.toMap(),
     };
   }
 
@@ -294,7 +294,7 @@ class Peer with EquatableMixin {
   factory Peer.fromJson(String source) => Peer.fromMap(json.decode(source));
 
   @override
-  List<Object> get props => [business, user];
+  List<Object?> get props => [business, user];
 }
 
 class Business with EquatableMixin {
